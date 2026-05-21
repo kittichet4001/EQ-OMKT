@@ -30,6 +30,5 @@ private:
     VocaloneAudioProcessor& audioProcessor;
     juce::Slider midiVolume; // [1]
     juce::AudioParameterChoice* choiceParam;
-    MyComponent myCustomComponent;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (VocaloneAudioProcessorEditor)
 };
