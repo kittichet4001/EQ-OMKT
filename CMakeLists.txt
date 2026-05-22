@@ -33,11 +33,18 @@ FetchContent_Declare(
     GIT_TAG        8.0.13 # หรือระบุเวอร์ชัน/branch ที่ต้องการ เช่น master, develop, หรือแท็กเวอร์ชัน
 )
 
+FetchContent_MakeAvailable(JUCE)
+
 # ประกาศให้สั่งติดตั้งเฉพาะเครื่องมือที่จำเป็น (ช่วยลดเวลา Build และโฟลเดอร์ไม่รก)
 set(JUCE_BUILD_EXAMPLES OFF CACHE INTERNAL "")
 set(JUCE_BUILD_EXTRAS OFF CACHE INTERNAL "")
 
-FetchContent_MakeAvailable(JUCE)
+find_program(CCACHE_PROGRAM ccache)
+if(CCACHE_PROGRAM)
+    set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
+    set(CMAKE_C_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
+endif()
+
 # If you are building a VST2 or AAX plugin, CMake needs to be told where to find these SDKs on your
 # system. This setup should be done before calling `juce_add_plugin`.
 
