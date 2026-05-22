@@ -23,8 +23,21 @@ project(AUDIO_PLUGIN_EXAMPLE VERSION 0.0.1)
 
 # find_package(JUCE CONFIG REQUIRED)        # If you've installed JUCE to your system
 # or
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/JUCE" JUCE)                    # If you've put JUCE in a subdirectory called JUCE
+# add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/JUCE" JUCE)                    # If you've put JUCE in a subdirectory called JUCE
+include(FetchContent)
 
+# 1. ประกาศดึง JUCE จาก Git Repository
+FetchContent_Declare(
+    JUCE
+    GIT_REPOSITORY https://github.com/juce-framework/JUCE.git
+    GIT_TAG        8.0.13 # หรือระบุเวอร์ชัน/branch ที่ต้องการ เช่น master, develop, หรือแท็กเวอร์ชัน
+)
+
+# ประกาศให้สั่งติดตั้งเฉพาะเครื่องมือที่จำเป็น (ช่วยลดเวลา Build และโฟลเดอร์ไม่รก)
+set(JUCE_BUILD_EXAMPLES OFF CACHE INTERNAL "")
+set(JUCE_BUILD_EXTRAS OFF CACHE INTERNAL "")
+
+FetchContent_MakeAvailable(JUCE)
 # If you are building a VST2 or AAX plugin, CMake needs to be told where to find these SDKs on your
 # system. This setup should be done before calling `juce_add_plugin`.
 
