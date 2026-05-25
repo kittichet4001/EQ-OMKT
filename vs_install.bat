@@ -1,0 +1,1 @@
+winget install --name "Visual Studio Community 2026" --override "--passive --config .\Requitment_installer.json" 
