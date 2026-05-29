@@ -1,1 +1,0 @@
-winget uninstall --name "Visual Studio Community 2026"
